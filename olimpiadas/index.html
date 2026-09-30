@@ -22,22 +22,21 @@
 
         async function baixarPDF() {
             try {
-                const docSnap = await getDoc(doc(db, "p", "q"));
+                const docSnapsot = await getDoc(doc(db, "p", "q"));
+                if (docSnapsot.exists()) {
 
-                if (docSnap.exists()) {
+                    const uint8Array = docSnapsot.data().dados.toUint8Array();
+                    const blob = new Blob([uint8Array], { type: "application/pdf" });
 
-                const uint8Array = docSnap.data().dados.toUint8Array();
-                const blob = new Blob([uint8Array], { type: "application/pdf" });
+                    url = URL.createObjectURL(blob);
+                    console.log("PDF disponível");
 
-                url = URL.createObjectURL(blob);
-                console.log("PDF disponível");
-
-                const a = document.getElementById("a");
-                a.href = url;
-                a.innerText = "Clique aqui para ver questões";
-                if (acessar) {
-                    window.open(url, "_blank");
-                }
+                    const a = document.getElementById("a");
+                    a.href = url;
+                    a.innerText = "Clique aqui para ver questões";
+                    if (acessar) {
+                        window.open(url, "_blank");
+                    }
 
                 } else {
                     console.log("Documento não encontrado!");
