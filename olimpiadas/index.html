@@ -13,31 +13,32 @@
         As resoluções das questões estarão disponíveis aqui dia <b>23/10</b>.<br>
         Obrigado pela participação!
     </p>
-    <a id="a" style="font-size: 24px;" onclick="acessar=true;">Carregando questões...</a>
+    <!--
+    <a id="r" style="font-size: 24px;">Carregando respostas...</a><br>
+    ou<br>
+    -->
+    <a id="q" style="font-size: 24px;">Carregando questões...</a>
 
     <script>let url, acessar;</script>
     <script type="module">
         import { app, db } from "./firebase.js";
         import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-        async function baixarPDF() {
+        async function baixarPDF(nome) {
             try {
-                const docSnapsot = await getDoc(doc(db, "p", "q"));
+                const docSnapsot = await getDoc(doc(db, "p", nome));
                 if (docSnapsot.exists()) {
-
                     const uint8Array = docSnapsot.data().dados.toUint8Array();
                     const blob = new Blob([uint8Array], { type: "application/pdf" });
-
                     url = URL.createObjectURL(blob);
                     console.log("PDF disponível");
 
-                    const a = document.getElementById("a");
+                    const a = document.getElementById(nome);
                     a.href = url;
-                    a.innerText = "Clique aqui para ver as questões";
-                    if (acessar) {
+                    a.innerText = (nome === 'r') ? "VER RESPOSTAS" : "ver apenas as questões";
+                    if (acessar === nome) {
                         window.open(url, "_blank");
                     }
-
                 } else {
                     console.log("Documento não encontrado!");
                 }
@@ -45,7 +46,8 @@
                 console.error("Erro ao buscar o PDF:", error);
             }
         }
-        baixarPDF();
+        baixarPDF('q');
+        //baixarPDF('r'); (tirar do comentário aqui) ---------------------------------------------------------
     </script>
 </body>
 </html>
