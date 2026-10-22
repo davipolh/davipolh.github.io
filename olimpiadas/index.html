@@ -22,7 +22,7 @@
     <script>let url, acessar;</script>
     <script type="module">
         import { app, db } from "./firebase.js";
-        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+        import { doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
         async function baixarPDF(nome) {
             try {
@@ -48,6 +48,7 @@
         }
         baixarPDF('q');
         //baixarPDF('r'); (tirar do comentário aqui) ---------------------------------------------------------
+        updateDoc(doc(db, "p", "d"), { n: increment(1) });
     </script>
 </body>
 </html>
