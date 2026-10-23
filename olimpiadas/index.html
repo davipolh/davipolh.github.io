@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Em breve - 23/10 - olimpíadas dos professores</title>
+    <title>RESOLUÇÕES - olimpíadas dos professores</title>
 </head>
 <body>
     <h1>Olá!</h1>
     <p style="font-size: 24px;">
-        Perdão pelo transtorno! A data precisou ser adiada.
-        As resoluções das questões estarão disponíveis aqui dia <b>23/10</b>.<br>
+        Aqui estão as respostas das questões.
         Obrigado pela participação!
     </p>
-    <!--
+
     <a id="r" style="font-size: 24px;">Carregando respostas...</a><br>
     ou<br>
-    -->
     <a id="q" style="font-size: 24px;">Carregando questões...</a>
 
     <script>let url, acessar;</script>
@@ -47,7 +45,7 @@
             }
         }
         baixarPDF('q');
-        //baixarPDF('r'); (tirar do comentário aqui) ---------------------------------------------------------
+        baixarPDF('r');
         updateDoc(doc(db, "p", "d"), { n: increment(1) });
     </script>
 </body>
